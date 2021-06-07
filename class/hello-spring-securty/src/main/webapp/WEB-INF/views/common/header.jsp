@@ -53,27 +53,24 @@ alert("${msg}");
                     
 			    </ul>
 			    
-			    
-			    <!-- 로그인한 경우 -->
+			    <%-- 로그인한 경우 --%>
 			    <sec:authorize access="isAuthenticated()">
-			  	  <sec:authentication property="principal.username"/><!-- 이름 -->
-			  	  <sec:authentication property="authorities"/> <!-- 권한 -->
-			  	   &nbsp;
-			  	  <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/logout';">로그아웃</button>
-			  	   
+			    	<sec:authentication property="principal.username"/>님, 안녕하세요.
+			    	<sec:authentication property="authorities"/>
+			    	&nbsp;
+			    	<form:form class="d-inline" action="${pageContext.request.contextPath}/member/memberLogout.do" method="POST">
+				    	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">로그아웃</button>
+			    	</form:form>
 			    </sec:authorize>
 			    
-			    
-			    <!-- 로그인하지않은 경우 -->
-			    
+			    <%-- 로그인하지 않은 경우 --%>
 			    <sec:authorize access="isAnonymous()">
-				    <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';">로그인</button>
-	                &nbsp;
-	                <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do';">회원가입</button>
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin.do';">로그인</button>
+                &nbsp;
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do';">회원가입</button>
 			    </sec:authorize>
-			    
-			    
-			    
+                
+                
 			 </div>
 		</nav>
 	</header>

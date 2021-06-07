@@ -19,10 +19,10 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Member implements UserDetails{
+public class Member implements UserDetails {
 
-	private String id;
-	private String password;
+	private String id; 			// username
+	private String password;	// password
 	private String name;
 	private String gender;
 	private Date birthday;
@@ -31,13 +31,21 @@ public class Member implements UserDetails{
 	private String address;
 	private String[] hobby;
 	private Date enrollDate;
-	private boolean enabled;
+	
+	// 복수개의 권한을 관리
+	// 문자열data("ROLE_USER", "ROLE_ADMIN")를 처리할 수 있는 GrantedAuthority의 하위클래스
+	private List<SimpleGrantedAuthority> authorities; // authorities 
+	
+	private boolean enabled; 		// 활성화 여부
 	
 	/**
-	 * 권한을 문자열로 관리
+	 * Collection - List/Set
+	 * 
+	 * Collection<? extends GrantedAuthority> 
+	 * 	- <GrantedAuthority를 상속하는 ?> -> 자식타입(상한선)
+	 *  - <? super Integer> -> Integer 부모타입 (하한선)
+	 * Collection<GrantedAuthority>
 	 */
-	private List<SimpleGrantedAuthority> authorities;
-	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -58,4 +66,5 @@ public class Member implements UserDetails{
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
+
 }
